@@ -4,6 +4,9 @@ let timeplayBtn = document.getElementById("time-play-btn");
 let accuplayBtn = document.getElementById("accu-play-btn");
 let scorefield = document.getElementById("score-field");
 let timeField = document.getElementById("timer");
+let highestField = document.getElementById("highest-score");
+let myBest = (parseInt(localStorage.getItem("highscore")) || 0);
+
 //===============================================
 let is_question = false;
 let is_run = 0;
@@ -46,7 +49,6 @@ function mrange() {
 function generateProblem() {
     let type = getRandomNumber(1, 4);
     if (type == 1) {
-        // Addition
         let r = arange();
         let a = getRandomNumber(r[0],r[1]);
         let b = getRandomNumber(r[2],r[3]);
@@ -125,6 +127,9 @@ timeplayBtn.addEventListener("click", function() {
         if (timeLeft <= 0) {
             clearInterval(timer);
             alert("Game Over! Your final score is: " + score);
+            myBest = Math.max(myBest,score)
+            highestField.value = myBest
+            localStorage.setItem("highscore",myBest)
             reset();
         }
     },1000);
@@ -165,3 +170,4 @@ accuplayBtn.addEventListener("click", function() {
 
 
 reset();
+highestField.value = myBest
