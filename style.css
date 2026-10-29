@@ -1,0 +1,67 @@
+body {
+    background-color: #000000;
+    color: #0bd700;
+}
+
+textarea {
+    background: transparent;
+    border: transparent;
+    color: #87ffeb;
+    resize: none;
+}
+* {
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+h6 {
+    color:rgb(0, 255, 72);
+}
+
+h1 {
+    text-align: center;
+    outline-color: azure;
+}
+h5 {
+    text-align: center;
+    outline-color: azure;
+}
+input {
+    background: transparent;
+    border: transparent;
+    color: #87ffeb;
+    resize: none;
+    text-align: center;
+}
+
+#buttons {
+    text-align: center;
+    text-align: center;
+}
+
+button{
+    background: transparent;
+    border: transparent;
+    color: #87ffeb;
+    resize: none;
+    text-align: center;
+}
+
+#forthedelta {
+    text-align: center;
+}
+
+#playarea{
+    text-align: center;
+}
+
+#answer-input{
+    background: #0bd700;
+    border: transparent;
+    color: #340000;
+    resize: none;
+    text-align: center;
+}
+
+#tips{
+    color: #0bd700;
+}

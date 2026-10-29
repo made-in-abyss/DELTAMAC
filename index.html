@@ -1,45 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>DELTAMAC</title>
-    <h1>DELTAMAC</h1>
-    <h6>highest timed score: <input id="highest-score" type="number" value="0"></input></h6>
+    <h1>&Delta;: DELTAMAC</h1>
+    <link rel = "stylesheet" href="style.css">
 </head>
 <body>
-    <button id="time-play-btn">Play [TIMED]</button><br>
-    <button id="accu-play-btn">Play [ACCURACY]</button>
+    <div id = "buttons">
+        <button id = "tips">KNOWS-NO-LIMIT</button><br><br>
+        <button id="time-play-btn">START-[&delta;]-THE-CHALLENGE</button><br>
+        <button id="accu-play-btn">START-[&Delta;]-THE-TRIAL</button>
+    </div>
     <br>
-    <br>
-    timer [or questions] = <input id="timer" type="number" value="120"></input>
-    score = <input id="score-field" type="number" value="0"></input>
-    <br>
-    <br>
-    question = <textarea id="question-text" readonly>a+b</textarea>
-    answer = <input id="answer-input" type="number">
-    <br>
-    <br>
-    <br>
-    <br>
-    [+- limiter]:<br>
-        a_lower = <input id="a-add-lower" type="number" value="2">
-        a_higher= <input id="a-add-higher" type="number" value="100">
+    <div id:"stats">
+        LEFT<input id="timer" type="number" value="120"></input>
         <br>
-        b_lower = <input id="b-add-lower" type="number" value="2">
-        b_higher= <input id="b-add-higher" type="number" value="100">
-    <br>
-    <br>
-    [*/ limiter]:<br>
-        a_lower = <input id="a-mul-lower" type="number" value="2">
-        a_higher= <input id="a-mul-higher" type="number" value="12">
+        SCORE<input id="score-field" type="number" value="0"></input>
         <br>
-        b_lower = <input id="b-mul-lower" type="number" value="2">
-        b_higher= <input id="b-mul-higher" type="number" value="12">
+        BEST<input id="highest-score" type="number" value="0"></input>
+    </div>
+    <br><br>
+    <div id = "playarea">
+        <input id="question-text" readonly></input>
+        = <input id="answer-input" type="number"></input>
+    </div>
+    <br><br><br><br>
+    <div id = "settings">
+        LOWER-PRECEDENCE<br>
+            A//LOWER<input id="a-add-lower" type="number" value="2">
+            A//HIGHER<input id="a-add-higher" type="number" value="100">
+            <br>
+            B//LOWER<input id="b-add-lower" type="number" value="2">
+            B//HIGHER<input id="b-add-higher" type="number" value="100">
+        <br>
+        <br>
+        HIGHER-PRECEDENCE<br>
+            A//LOWER<input id="a-mul-lower" type="number" value="2">
+            A//HIGHER<input id="a-mul-higher" type="number" value="12">
+            <br>
+            B//LOWER<input id="b-mul-lower" type="number" value="2">
+            B//HIGHER<input id="b-mul-higher" type="number" value="12">
+    </div>
     <script src="engine.js"></script>
     <footer>
-        <br>
+        <h6>
         See me on Github: <a href="https://github.com/made-in-abyss/DELTAMAC" target="_blank">View on GitHub</a>
-        <br>
-        Loves from Firlance :3
+        </h6>
+        <h2></h2><div id = "forthedelta">&delta;: FOR-THE-DELTA</div></h2>
     </footer>
 </body>
 </html>

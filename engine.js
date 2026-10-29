@@ -4,6 +4,7 @@ let timeplayBtn = document.getElementById("time-play-btn");
 let accuplayBtn = document.getElementById("accu-play-btn");
 let scorefield = document.getElementById("score-field");
 let timeField = document.getElementById("timer");
+let tips = document.getElementById("tips");
 let highestField = document.getElementById("highest-score");
 let myBest = (parseInt(localStorage.getItem("highscore")) || 0);
 
@@ -16,6 +17,16 @@ let playtime = 120;
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+let tiplist = [
+    "KNOWS-NO-BOUND",
+    "WE-ARE-HEADING-TOWARDS-A-NUCLEAR-STAR",
+    "KNOWS-NO-LIMIT",
+    "ARITH//METICS",
+    "ADDI//TIVE",
+    "MULTIPL//ICATIVE",
+]
+
 //===============================================
 function getSafeRange(lowerId, higherId, defaultLow, defaultHigh, minAllowed = 1) {
     let lowerEl = document.getElementById(lowerId);
@@ -86,7 +97,8 @@ function reset() {
     is_run = 0;
     is_question = false;
     inputField.value = "";
-    questionField.value = "Click Play!";
+    questionField.value = "NO INPUT";
+    tips.textContent = tiplist[getRandomNumber(0,5)];
     timeField.value = playtime;
     scorefield.value = 0;
 }
