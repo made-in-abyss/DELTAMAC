@@ -2,7 +2,14 @@ body {
     background-color: #000000;
     color: #0bd700;
 }
-
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
 textarea {
     background: transparent;
     border: transparent;
@@ -39,6 +46,7 @@ input {
     color: #87ffeb;
     resize: none;
     text-align: center;
+
 }
 
 #buttons {
@@ -115,5 +123,5 @@ button:active {
     height: 100vh;
     z-index: -1;
     pointer-events: none;
-    opacity: 0.125;
+    opacity: 0.15;
 }

@@ -9,6 +9,10 @@ let highestField = document.getElementById("highest-score");
 let myBest = (parseInt(localStorage.getItem("highscore")) || 0);
 let canvas = document.getElementById("bg-canvas");
 let ctx = canvas.getContext("2d");
+let audioCtx, analyser, dataArray;
+let isAudioInit = false;
+let bgm = new Audio("delta.mp3");
+bgm.loop = true;
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -35,6 +39,18 @@ let tiplist = [
     "AND-WE'LL-FLY-FOR-THE-DELTA",
 ]
 let deltas = []
+function initAudio() {
+    if (isAudioInit) return;
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const source = audioCtx.createMediaElementSource(bgm);
+    analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 64;
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    dataArray = new Uint8Array(analyser.frequencyBinCount);
+    isAudioInit = true;
+}
+
 function spawndelta(){
     let trig = {
         x: Math.random() * canvas.width,
@@ -46,28 +62,46 @@ function spawndelta(){
     };
     deltas.push(trig);
 }
+let energy = 0;
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let energy = 0;
+    if (isAudioInit==true) {
+        analyser.getByteFrequencyData(dataArray);
+        let count = dataArray.length;
+        let stickWidth = canvas.width/count;
+        ctx.fillStyle = "#0bd700";
+        for (let i = 0; i <count;i++) {
+            let stickHeight = ((dataArray[i]/255)*5)**4;
+            energy+=dataArray[i]/255;
+            let x = i * stickWidth;
+            let y = canvas.height - stickHeight;
+            ctx.fillRect(x + 2, y, stickWidth - 4, stickHeight);
+        }
+        energy = energy/(count-3);
+    }
     ctx.strokeStyle = "#0bd700";
     ctx.lineWidth = 1.5;
     for(let d of deltas){
-        d.y -= d.speed;
-        d.rot += d.dir*0.005;
+        let csize = d.size*(1+energy);
+        let cspeed = d.speed*(1+energy);
+        d.y -= cspeed;
+        d.rot += d.dir*(0.005*(1+energy));
         if (d.y < -50) d.y = canvas.height + 50;
         ctx.save();
         ctx.translate(d.x, d.y);
         ctx.rotate(d.rot);
         ctx.beginPath();
-        ctx.moveTo(0, -d.size);
-        ctx.lineTo(-d.size, d.size);
-        ctx.lineTo(d.size, d.size);
+        ctx.moveTo(0, -csize);
+        ctx.lineTo(-csize, csize);
+        ctx.lineTo(csize, csize);
         ctx.closePath();
         ctx.stroke();
         ctx.restore();
     }
     requestAnimationFrame(draw);
 }
-for(let i = 1;i<=10;i+=1){
+for(let i = 1;i<=15;i+=1){
     spawndelta();
 }
 draw();
@@ -145,6 +179,9 @@ function reset() {
     tips.textContent = tiplist[getRandomNumber(0,tiplist.length-1)];
     timeField.value = playtime;
     scorefield.value = 0;
+    bgm.pause();
+    energy = 0;
+    bgm.currentTime = 0;
 }
 
 timeField.addEventListener("input", function() {
@@ -226,6 +263,10 @@ accuplayBtn.addEventListener("click", function() {
     inputField.value = "";
     inputField.focus();
     generateProblem();
+    initAudio();
+    audioCtx.resume();
+    bgm.play();
+    
 });
 
 
