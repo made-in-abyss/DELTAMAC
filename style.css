@@ -65,3 +65,23 @@ button{
 #tips{
     color: #0bd700;
 }
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.125;
+}
+@keyframes pulseDelta {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) scale(0.95);
+        opacity: 0.03;
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(5deg) scale(1.05);
+        opacity: 0.06;
+    }
+}

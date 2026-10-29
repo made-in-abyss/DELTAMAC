@@ -7,6 +7,10 @@ let timeField = document.getElementById("timer");
 let tips = document.getElementById("tips");
 let highestField = document.getElementById("highest-score");
 let myBest = (parseInt(localStorage.getItem("highscore")) || 0);
+let canvas = document.getElementById("bg-canvas");
+let ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 //===============================================
 let is_question = false;
@@ -26,6 +30,43 @@ let tiplist = [
     "ADDI//TIVE",
     "MULTIPL//ICATIVE",
 ]
+let deltas = []
+function spawndelta(){
+    let trig = {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 20 + 10,
+        speed: Math.random() * 0.1 + 0.2,
+        rot: Math.random() * Math.PI,
+        dir: ((Math.random()*2 - 1)>=0)? 1:-1 ,
+    };
+    deltas.push(trig);
+}
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = "#0bd700";
+    ctx.lineWidth = 1.5;
+    for(let d of deltas){
+        d.y -= d.speed;
+        d.rot += d.dir*0.005;
+        if (d.y < -50) d.y = canvas.height + 50;
+        ctx.save();
+        ctx.translate(d.x, d.y);
+        ctx.rotate(d.rot);
+        ctx.beginPath();
+        ctx.moveTo(0, -d.size);
+        ctx.lineTo(-d.size, d.size);
+        ctx.lineTo(d.size, d.size);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.restore();
+    }
+    requestAnimationFrame(draw);
+}
+for(let i = 1;i<=10;i+=1){
+    spawndelta();
+}
+draw();
 
 //===============================================
 function getSafeRange(lowerId, higherId, defaultLow, defaultHigh, minAllowed = 1) {
