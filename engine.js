@@ -29,6 +29,10 @@ let tiplist = [
     "ARITH//METICS",
     "ADDI//TIVE",
     "MULTIPL//ICATIVE",
+    "LET-ME-SEE-THE-STAR",
+    "LET-ME-SEE-THE-FUTURE",
+    "NOW-YOU-ARE-A-DREAMER",
+    "AND-WE'LL-FLY-FOR-THE-DELTA",
 ]
 let deltas = []
 function spawndelta(){
@@ -127,9 +131,8 @@ function generateProblem() {
         let r = mrange();
         let a = getRandomNumber(r[0],r[1]);
         let b = getRandomNumber(r[2],r[3]);
-        let c = a*b;
-        correctAnswer = a;
-        questionField.value = c+" / "+b;
+        correctAnswer = b;
+        questionField.value = a*b+" / "+a;
     }
     is_question = true;
 }
@@ -139,7 +142,7 @@ function reset() {
     is_question = false;
     inputField.value = "";
     questionField.value = "NO INPUT";
-    tips.textContent = tiplist[getRandomNumber(0,5)];
+    tips.textContent = tiplist[getRandomNumber(0,tiplist.length-1)];
     timeField.value = playtime;
     scorefield.value = 0;
 }
@@ -150,6 +153,10 @@ timeField.addEventListener("input", function() {
     if (!isNaN(val) && val > 0) {
         playtime = val;
     }
+});
+
+tips.addEventListener("click",function(){
+    tips.textContent = tiplist[getRandomNumber(0,tiplist.length-1)];
 });
 
 //==========TIME MODE=============

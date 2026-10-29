@@ -17,9 +17,17 @@ h6 {
     color:rgb(0, 255, 72);
 }
 
+
+h1:hover {
+    color: #4bff3e;
+    transition: all 0.2s ease;
+    text-shadow: 0 0 8px #4bff3e, 0 0 20px #4bff3e;
+    border-color: #ffffff;
+}
+
+
 h1 {
     text-align: center;
-    outline-color: azure;
 }
 h5 {
     text-align: center;
@@ -50,6 +58,13 @@ button{
     text-align: center;
 }
 
+#forthedelta:hover {
+    color: #4bff3e;
+    transition: all 0.2s ease;
+    text-shadow: 0 0 8px #4bff3e, 0 0 20px #4bff3e;
+    border-color: #ffffff;
+}
+
 #playarea{
     text-align: center;
 }
@@ -62,9 +77,36 @@ button{
     text-align: center;
 }
 
+#answer-input:hover{
+    background: #4f00d7;
+    color: #0bd700;
+    text-shadow: 0 0 8px #00a30e, 0 0 20px #03a400;
+    box-shadow: 0 0 15px rgba(0, 254, 21, 0.5);
+}
 #tips{
     color: #0bd700;
 }
+#tips:hover{
+    color: #4f00d7;
+}
+
+button:hover {
+    color: #4f00d7;
+    text-shadow: 0 0 8px #4f00d7, 0 0 20px #4f00d7;
+    box-shadow: 0 0 15px rgba(119, 0, 255, 0.5);
+    border-color: #ffffff;
+    transition: all 0.2s ease;
+}
+button:active {
+    color: #4f00d7;
+    text-shadow: 0 0 50px #fbfffb, 0 0 20px #e9f8e9;
+    box-shadow: 0 0 50px rgba(232, 241, 232, 0.5);
+    border-color: #ffffff;
+    transform: translateY(-5px);
+    transition: all 0.2s ease;
+}
+
+
 #bg-canvas {
     position: fixed;
     top: 0;
@@ -74,14 +116,4 @@ button{
     z-index: -1;
     pointer-events: none;
     opacity: 0.125;
-}
-@keyframes pulseDelta {
-    0% {
-        transform: translate(-50%, -50%) rotate(0deg) scale(0.95);
-        opacity: 0.03;
-    }
-    100% {
-        transform: translate(-50%, -50%) rotate(5deg) scale(1.05);
-        opacity: 0.06;
-    }
 }
