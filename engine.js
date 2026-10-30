@@ -65,30 +65,30 @@ function spawndelta(){
 let energy = 0;
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    let energy = 0;
+    let col = `rgb(${255-(energy*255) }, ${energy*255}, ${255-(energy*255) })`;
     if (isAudioInit==true) {
         analyser.getByteFrequencyData(dataArray);
         let count = dataArray.length;
         let stickWidth = canvas.width/count;
-        ctx.fillStyle = "#0bd700";
+        ctx.fillStyle = col
         for (let i = 0; i <count;i++) {
-            let stickHeight = ((dataArray[i]/255)*4)**5;
+            let stickHeight =(dataArray[i]*5.3/255)**4;
             energy+=dataArray[i]/255;
             let x = i * stickWidth;
             let y = canvas.height - stickHeight;
             ctx.fillRect(x + 2, y, stickWidth - 4, stickHeight);
         }
-        energy = energy/(count-4);
+        energy = energy/count;
     }
     canvas.style.opacity = (0.1+energy*0.4);
-    ctx.strokeStyle = "#0bd700";
+    ctx.strokeStyle = col;
     ctx.lineWidth = 1.5;
     for(let d of deltas){
-        let csize = d.size*(1+energy);
-        let cspeed = d.speed*(1+energy);
+        let csize = d.size*(1+energy*1.3);
+        let cspeed = d.speed*(1+energy*1.4);
         d.y -= cspeed;
-        d.rot += d.dir*(0.005*(1+energy));
-        if (d.y < -50) d.y = canvas.height + 50;
+        d.rot += d.dir*(0.005*(1+energy*1.2));
+        if (d.y < -50) d.y =canvas.height+50;
         ctx.save();
         ctx.translate(d.x, d.y);
         ctx.rotate(d.rot);
