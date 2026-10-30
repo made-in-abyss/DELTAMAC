@@ -72,14 +72,15 @@ function draw() {
         let stickWidth = canvas.width/count;
         ctx.fillStyle = "#0bd700";
         for (let i = 0; i <count;i++) {
-            let stickHeight = ((dataArray[i]/255)*5)**4;
+            let stickHeight = ((dataArray[i]/255)*4)**5;
             energy+=dataArray[i]/255;
             let x = i * stickWidth;
             let y = canvas.height - stickHeight;
             ctx.fillRect(x + 2, y, stickWidth - 4, stickHeight);
         }
-        energy = energy/(count-3);
+        energy = energy/(count-4);
     }
+    canvas.style.opacity = (0.1+energy*0.4);
     ctx.strokeStyle = "#0bd700";
     ctx.lineWidth = 1.5;
     for(let d of deltas){
